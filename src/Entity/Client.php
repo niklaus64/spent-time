@@ -19,6 +19,7 @@ class Client
     private ?string $externalID = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]

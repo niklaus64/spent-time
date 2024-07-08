@@ -17,13 +17,13 @@ class TimeEntry
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $externalID = null;
 
-    #[ORM\Column(length: 3000)]
+    #[ORM\Column(length: 3000, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $startTime = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endTime = null;
 
     #[ORM\ManyToOne(targetEntity: Project::class, inversedBy: 'timeEntries')]
@@ -67,7 +67,7 @@ class TimeEntry
         return $this->startTime;
     }
 
-    public function setStartTime(\DateTimeInterface $startTime): static
+    public function setStartTime(?\DateTimeInterface $startTime): static
     {
         $this->startTime = $startTime;
 
@@ -79,7 +79,7 @@ class TimeEntry
         return $this->endTime;
     }
 
-    public function setEndTime(\DateTimeInterface $endTime): static
+    public function setEndTime(?\DateTimeInterface $endTime): static
     {
         $this->endTime = $endTime;
 
@@ -98,7 +98,7 @@ class TimeEntry
         return $this;
     }
 
-    public function getMember(): ?Project
+    public function getMember(): ?Member
     {
         return $this->member;
     }
