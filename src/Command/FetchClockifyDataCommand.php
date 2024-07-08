@@ -9,23 +9,17 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(
+    name: 'app:fetch-clockify-data',
+    description: 'Fetches data from Clockify and syncs with the database.',
+)]
 class FetchClockifyDataCommand extends Command
 {
-    protected static $defaultName = 'app:fetch-clockify-data';
-    private $clockifyService;
-
-    public function __construct(ClockifyService $clockifyService, EntityManagerInterface $entityManager)
+    public function __construct(private readonly ClockifyService $clockifyService, private readonly EntityManagerInterface $entityManager)
     {
         parent::__construct();
-        $this->clockifyService = $clockifyService;
-        $this->entityManager = $entityManager;
-    }
-
-    protected function configure()
-    {
-        $this
-            ->setDescription('Fetches data from Clockify and syncs with the database');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

@@ -6,8 +6,11 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
+#[ApiResource]
 class Client
 {
     #[ORM\Id]
@@ -23,6 +26,9 @@ class Client
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     private ?string $email = null;
 
     /**

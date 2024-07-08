@@ -6,8 +6,11 @@ use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
+#[ApiResource]
 class Project
 {
     #[ORM\Id]
@@ -19,6 +22,7 @@ class Project
     private ?string $externalID = null;
 
     #[ORM\Column(length: 250)]
+    #[Assert\Length(min:2)]
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]

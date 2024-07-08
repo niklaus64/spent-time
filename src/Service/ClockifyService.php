@@ -11,10 +11,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class ClockifyService
 {
-    public function __construct(HttpClientInterface $http, EntityManagerInterface $entityManager)
+    private $apiKey;
+    private $workspaceId;
+
+    public function __construct(private readonly HttpClientInterface $http, private readonly EntityManagerInterface $entityManager)
     {
-        $this->http = $http;
-        $this->entityManager = $entityManager;
         $this->apiKey = $_ENV['CLOCKIFY_API_KEY'] ?? null;
         $this->workspaceId = $_ENV['CLOCKIFY_WORKSPACE_ID'] ?? null;
     }

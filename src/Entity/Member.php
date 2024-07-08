@@ -6,8 +6,11 @@ use App\Repository\MemberRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: MemberRepository::class)]
+#[ApiResource]
 class Member
 {
     #[ORM\Id]
@@ -21,7 +24,10 @@ class Member
     #[ORM\Column(length: 250)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     private ?string $email = null;
 
     #[ORM\OneToMany(mappedBy: 'member', targetEntity: TimeEntry::class)]

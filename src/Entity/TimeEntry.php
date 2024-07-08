@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Repository\TimeEntryRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: TimeEntryRepository::class)]
+#[ApiResource]
 class TimeEntry
 {
     #[ORM\Id]

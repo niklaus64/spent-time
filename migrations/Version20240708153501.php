@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240708124034 extends AbstractMigration
+final class Version20240708153501 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -25,7 +25,7 @@ final class Version20240708124034 extends AbstractMigration
         $this->addSql('CREATE SEQUENCE project_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE time_entry_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE client (id INT NOT NULL, external_id VARCHAR(255) DEFAULT NULL, name VARCHAR(100) NOT NULL, email VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE member (id INT NOT NULL, external_id VARCHAR(255) DEFAULT NULL, name VARCHAR(250) NOT NULL, email VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE member (id INT NOT NULL, external_id VARCHAR(255) DEFAULT NULL, name VARCHAR(250) NOT NULL, email VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE project (id INT NOT NULL, client_id INT DEFAULT NULL, external_id VARCHAR(255) DEFAULT NULL, name VARCHAR(250) NOT NULL, billable BOOLEAN DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_2FB3D0EE19EB6921 ON project (client_id)');
         $this->addSql('CREATE TABLE time_entry (id INT NOT NULL, project_id INT DEFAULT NULL, member_id INT DEFAULT NULL, external_id VARCHAR(255) DEFAULT NULL, description VARCHAR(3000) DEFAULT NULL, start_time TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, end_time TIMESTAMP(0) WITHOUT TIME ZONE DEFAULT NULL, PRIMARY KEY(id))');
